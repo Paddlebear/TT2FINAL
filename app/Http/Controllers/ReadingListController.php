@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\ReadingList;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 
@@ -28,21 +29,30 @@ class ReadingListController extends Controller
                 select('books.booktitle', 'books.author', 'books.publicationyear', 'genres.genrename')->where('reading_list_id', '=', $id)->get();
         $tags = DB::table('reading_list_tag')->join('tags', 'reading_list_tag.tag_id', '=', 'tags.id')->select('tags.tagname')->where('reading_list_id', '=', $id)->get();
         return view('reading_list', ['books' => $books, 'tags' => $tags, 'list' => $list]);
-        //return view('reading_list', compact('list'), compact('books'));
+        return view('reading_list', compact('list'), compact('books'));
     }
-    public function userindex($id)
+//    public function userlist($name)
+//    {
+//        return view('user_lists');
+//    }
+    public function userlist($name)
     {
+        $user = DB::table('users')->select('users.*')->where('name', '=', $name)->get();
+        $id = $user[0]->id;
         $lists = DB::table('reading_lists')->join('users', 'reading_lists.user_id', '=', 'users.id')
-                ->select('reading_lists.id','reading_lists.listname', 'users.name', 'reading_lists.description')->where('reading_lists.user_id', '=', $id)->get();
+                ->select('reading_lists.id','reading_lists.listname', 'users.name', 'reading_lists.description')->where('users.name', '=', $name)->get();
+        return view ('user_lists', ['lists' => $lists, 'user' => $name]);
+        //return view('user_lists', ['user' => $name]);
     }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('new_reading_list');
+        $user = User::findOrFail($id);
+        return view('new_reading_list', compact('user'));
     }
 
     /**

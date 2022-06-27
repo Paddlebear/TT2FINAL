@@ -20,20 +20,23 @@ use App\Http\Controllers\BookController;
 //    return view('welcome');
 //});
 
-Route::get('/dashboard', function () {
-    //Route::resource('home', ReadingListController::class);
-    //return view('all_reading_lists');
-    Route::redirect('/', 'home');
-})->middleware(['auth'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    //Route::resource('home', ReadingListController::class);
+//    //return view('all_reading_lists');
+//    Route::redirect('/', 'home');
+//})->middleware(['auth'])->name('home');
 
 require __DIR__.'/auth.php';
 
-Route::redirect('/', 'home');
+Route::redirect('/', 'home')->name('home');
 Route::resource('home', ReadingListController::class);
 Route::resource('books', BookController::class, ['except' => ['index', 'create']]);
-Route::get('books', [BookController::class, 'index']);
-Route::get('add_book', [BookController::class, 'create']);
-Route::get('add_reading_list', [ReadingListController::class, 'create']);
-Route::get('delete_reading_list/{id}', [ReadingListController::class, 'showdelete']);
-Route::get('reading_lists/{listname}', [ReadingListController::class, 'showlist']);
-Route::post('book/update', [BookController::class, 'update']);
+Route::get('books', [BookController::class, 'index'])->name('books');
+Route::get('add_book', [BookController::class, 'create'])->middleware('auth')->name('addbook');
+Route::get('add_reading_list/{id}', [ReadingListController::class, 'create'])->middleware('auth')->name('addlist');
+Route::get('delete_reading_list/{id}', [ReadingListController::class, 'showdelete'])->middleware('auth')->name('deletelist');
+Route::get('reading_lists/{listname}', [ReadingListController::class, 'showlist'])->name('list');
+//Route::get('book/{id}/update', [BookController::class, 'show'])->middleware('auth')->name('bookupdate');
+Route::post('book/update', [BookController::class, 'update'])->middleware('auth'); //???
+//Route::get('reading_lists/{name}', [ReadingListController::class, 'userlist'])->middleware('auth')->name('userlist');
+Route::get('profile/{name}', [ReadingListController::class, 'userlist'])->middleware('auth')->name('userlist');
