@@ -98,7 +98,7 @@ class ReadingListController extends Controller
      */
     public function edit($id)
     {
-        //
+       
     }
 
     /**

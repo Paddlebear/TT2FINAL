@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- this is also the homepage. -->
 <html>
     <head>
         <title>{{Auth::user()->name}}'s profile - Reading Recs</title>

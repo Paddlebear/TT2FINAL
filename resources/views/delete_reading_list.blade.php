@@ -18,6 +18,28 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body>
+        @if (Route::has('login'))
+        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+            @auth
+            <!--            <a href="{{ url('/home') }}">Homepage</a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+            
+                            <x-dropdown-link :href="route('logout')"
+                                             onclick="event.preventDefault();
+                                                 this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>-->
+            @else
+            <a href="{{ route('login') }}">Log in</a>
+
+            @if (Route::has('register'))
+            <a href="{{ route('register') }}">Register</a>
+            @endif
+            @endauth
+        </div>
+        @endif
+        @include('layouts.navigation')
         Are you sure you want to delete this list with id {{ $list->id }}?
         <td>
                     <form method="POST"

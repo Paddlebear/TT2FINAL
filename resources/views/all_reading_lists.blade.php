@@ -58,16 +58,9 @@
                     <td> {{ $list->name }} </td>
                     <td> {{ $list->description }} </td>
                     <td><input type="button" value="See list contents" onclick="seeList('{{$list->listname}}')"></td>
-                    @auth
-                    <td><input type="button" value="Delete list" onclick="deleteList({{ $list->id }})"></td>
-                    @endauth
                     @endforeach
             </table>
             @endif
-            <p> <input type="button" value="See Books" onclick="seeBooks({})"> </p>
-            @auth
-            <p> <input type="button" value="New List (in development)" onclick="addList({{Auth::id()}})"> </p>
-            @endauth
     <!--        <p> <input type="button" value="Search books" onclick="filterBooks({})"> </p>-->
         </main>
         <script> ///sample code for later
