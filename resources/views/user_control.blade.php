@@ -56,30 +56,17 @@
                 <td> {{ $user->id }} </td>
                 <td> {{ $user->name }} </td>
                 <td> {{ $user->email }} </td>
-                <td>
-                    <form method="POST"
-
-                          action='{{action([App\Http\Controllers\AdminController::class, 'blockUser'],$user -> id) }}'>
-                        @csrf @method('DELETE')
-                        <input type="submit" value="Block user"></form> </td>
-                <td>
-                    <form method="POST"
-
-                          action='{{action([App\Http\Controllers\AdminController::class, 'deleteUser'],$user -> id) }}'>
-                        @csrf @method('DELETE')
-                        <input type="submit" value="Delete user"></form> </td>
+                <td><input type="button" value="Delete user" onclick="deleteUser('{{$user->id}}')"></td>
                 @endforeach
         </table>
         @endif
 <!--        <p> <input type="button" value="New Book" onclick="addCountry({})"> </p>
         <p> <input type="button" value="Search books" onclick="filterBooks({})"> </p>-->
-<!--        <script> ///sample code for later
-            function addCountry() {
-                window.location.href = "/country/create";
+        <script> ///sample code for later
+            function deleteUser(id)
+            {
+                window.location.href = "/delete_user/" + id;
             }
-            function filterBooks() {
-                window.location.href = "filter";
-            }
-        </script>-->
+        </script>
     </body>
 </html>

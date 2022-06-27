@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\ReadingList;
 use App\Models\User;
+use App\Models\Book;
+
 
 use Illuminate\Http\Request;
 
@@ -96,11 +98,27 @@ class ReadingListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($bookid, $userid)
     {
-       
+       $book = Book::findOrFail($bookid);
+       $lists = DB::table('reading_lists')->select('reading_lists.id','reading_lists.listname')->where('reading_lists.user_id', '=', $userid)->get();
+//       $lists = $userlists->map(function ($list) {
+//            $list->value = $list->id;
+//            return $list;
+//	   });
+        return view('add_books_to_list', ['lists' => $lists, 'book' => $book, 'userid' => $userid]);
     }
-
+    public function addlist(Request $request)
+    {
+        $rules = array(
+            'reading_list_id' => 'required|exists:book_reading_list,reading_list_id',
+            //'book_id' => 'required|exists:book_reading_list,book_id'
+        );
+        $this->validate($request, $rules);
+        $listid = $request->reading_list_id;
+        $bookid = $request->book_id;
+        DB::insert('insert into book_reading_list (book_id, reading_list_id) values (?, ?)', [$bookid, $listid]);
+    }
     /**
      * Update the specified resource in storage.
      *

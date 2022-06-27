@@ -40,3 +40,5 @@ Route::get('reading_lists/{listname}', [ReadingListController::class, 'showlist'
 Route::post('book/update', [BookController::class, 'update'])->middleware('auth'); //???
 //Route::get('reading_lists/{name}', [ReadingListController::class, 'userlist'])->middleware('auth')->name('userlist');
 Route::get('profile/{name}', [ReadingListController::class, 'userlist'])->middleware('auth')->name('userlist');
+Route::get('add_to_list/{bookid}/{userid}', [ReadingListController::class, 'edit'])->middleware('auth')->name('addtolist');
+Route::post('add_to_list', [ReadingListController::class, 'addlist'])->middleware('auth')->name('addtolistupdate');

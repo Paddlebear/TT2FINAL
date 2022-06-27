@@ -49,6 +49,11 @@
                 <td> {{ $book->author }} </td>
                 <td> {{ $book->publicationyear }} </td>
                 <td> {{ $book->genrename }} </td>
+                @auth<td>
+                    <form method="POST"
+                          action='{{action([App\Http\Controllers\ReadingListController::class, 'edit'], [$book -> id, Auth::id()]) }}'>
+                        @csrf @method('GET')
+                        <input type="submit" value="Add to List"></form> </td>@endauth
                 @endforeach
         </table>
         @endif

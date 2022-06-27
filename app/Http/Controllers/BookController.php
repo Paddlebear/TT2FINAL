@@ -17,7 +17,7 @@ class BookController extends Controller
     public function index()
     {
         $books = DB::table('books')->join('genres', 'books.genre_id', '=', 'genres.id')->
-                select('books.booktitle', 'books.author', 'books.publicationyear', 'genres.genrename')->orderBy('books.id')->get();
+                select('books.*', 'genres.genrename')->orderBy('books.id')->get();
         return view('all_books', compact('books'));
     }
 

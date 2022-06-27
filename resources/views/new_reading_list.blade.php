@@ -40,7 +40,7 @@
         </div>
         @endif
         @include('layouts.navigation')
-        We will add a new list to the system (feature is still in development), user id: {{$user->id}}:
+        We will add a new list to the system.
         <form method="POST"
               action="{{action([App\Http\Controllers\ReadingListController::class, 'store']) }}">
             @csrf
