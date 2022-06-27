@@ -30,6 +30,11 @@ class ReadingListController extends Controller
         return view('reading_list', ['books' => $books, 'tags' => $tags, 'list' => $list]);
         //return view('reading_list', compact('list'), compact('books'));
     }
+    public function userindex($id)
+    {
+        $lists = DB::table('reading_lists')->join('users', 'reading_lists.user_id', '=', 'users.id')
+                ->select('reading_lists.id','reading_lists.listname', 'users.name', 'reading_lists.description')->where('reading_lists.user_id', '=', $id)->get();
+    }
     /**
      * Show the form for creating a new resource.
      *

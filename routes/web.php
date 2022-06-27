@@ -19,12 +19,14 @@ use App\Http\Controllers\BookController;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-//
-//Route::get('/dashboard', function () {
-//    return view('dashboard');
-//})->middleware(['auth'])->name('dashboard');
-//
-//require __DIR__.'/auth.php';
+
+Route::get('/dashboard', function () {
+    //Route::resource('home', ReadingListController::class);
+    //return view('all_reading_lists');
+    Route::redirect('/', 'home');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
 
 Route::redirect('/', 'home');
 Route::resource('home', ReadingListController::class);
