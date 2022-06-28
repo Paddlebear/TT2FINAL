@@ -64,7 +64,7 @@
         <script> ///sample code for later
             function deleteUser(id)
             {
-                window.location.href = "/delete_user/" + id;
+                window.location.href = "/admin/users/" + id;
             }
         </script>
     </body>

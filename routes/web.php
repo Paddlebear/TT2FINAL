@@ -36,6 +36,7 @@ Route::resource('home', ReadingListController::class);
 Route::resource('books', BookController::class, ['except' => ['index', 'create']]);
 Route::get('books', [BookController::class, 'index'])->name('books');
 Route::get('add_book', [BookController::class, 'create'])->middleware('auth')->name('addbook');
+Route::get('add_tag', [TagController::class, 'create'])->middleware('auth.admin')->name('addtag');
 Route::get('add_reading_list/{id}', [ReadingListController::class, 'create'])->middleware('auth')->name('addlist');
 Route::get('delete_reading_list/{id}', [ReadingListController::class, 'showdelete'])->middleware('auth')->name('deletelist');
 Route::get('reading_lists/{listname}', [ReadingListController::class, 'showlist'])->name('list');
@@ -45,12 +46,14 @@ Route::post('book/update', [BookController::class, 'update'])->middleware('auth.
 Route::get('profile/{name}', [ReadingListController::class, 'userlist'])->middleware('auth')->name('userlist');
 Route::get('add_to_list/{bookid}/{userid}', [ReadingListController::class, 'edit'])->middleware('auth')->name('addtolist');
 Route::post('add_to_list', [ReadingListController::class, 'addlist'])->middleware('auth')->name('addtolistupdate');
-Route::get('all_lists', [AdminController::class, 'adminlist'])->middleware('auth.admin')->name('adminlist');
-Route::get('all_books', [AdminController::class, 'adminbook'])->middleware('auth.admin')->name('adminbook');
-Route::get('all_users', [AdminController::class, 'adminuser'])->middleware('auth.admin')->name('adminuser');
-Route::get('all_tags', [AdminController::class, 'admintags'])->middleware('auth.admin')->name('admintags');
-//Route::resource('all_tags', [AdminController::class, 'deletetag'])->middleware('auth.admin');
-Route::get('all_genres', [AdminController::class, 'admingenres'])->middleware('auth.admin')->name('admingenres');
+Route::get('admin/lists', [AdminController::class, 'adminlist'])->middleware('auth.admin')->name('adminlist');
+Route::get('admin/books', [AdminController::class, 'adminbook'])->middleware('auth.admin')->name('adminbook');
+Route::get('admin/users', [AdminController::class, 'adminuser'])->middleware('auth.admin')->name('adminuser');
+Route::get('admin/users/{id}', [AdminController::class, 'showdelete'])->middleware('auth.admin');
+Route::resource('users', AdminController::class, ['except' => ['index', 'create']]);
+Route::get('admin/tags', [AdminController::class, 'admintags'])->middleware('auth.admin')->name('admintags');
+Route::get('admin/tags/{id}', [TagController::class, 'showdelete'])->middleware('auth.admin');
+Route::resource('tags', TagController::class, ['except' => ['index', 'create']]);
 
 Route::get('set-locale/{locale}', function ($locale) {
     App::setLocale($locale);

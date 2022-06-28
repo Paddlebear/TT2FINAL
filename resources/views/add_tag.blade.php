@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Delete a user //do the swirly brackets for the name thing, same in routing</title>
+        <title>New Tag - Reading Recs</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -40,9 +40,22 @@
         </div>
         @endif
         @include('layouts.navigation')
-        {{ __('messages.deleteuser', ['name' => $user->name]) }}
+        {{ __('messages.We will add a new tag to the system.') }}
         <form method="POST"
-        action="{{action([App\Http\Controllers\AdminController::class, 'destroy'], $user->id) }}">
-            @csrf @method('DELETE')<input type="submit" value="delete"></form>
-</body>
+              action="{{action([App\Http\Controllers\TagController::class, 'store']) }}">
+            @csrf
+            <label for="tagname">{{ __('messages.Name') }}: </label>
+            <input type="text" name="tagname" id="tagname">
+            <input type="submit" value="{{ __('messages.Create') }}">
+            @if (count($errors) > 0)
+            <div>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+        </form>
+    </body>
 </html>

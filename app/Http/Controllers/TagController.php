@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Tag;
 
 class TagController extends Controller
@@ -14,7 +15,7 @@ class TagController extends Controller
      */
     public function __construct() {
         // only Admins have access to the following methods
-        $this->middleware('auth.admin')->only(['destroy']);
+        $this->middleware('auth.admin');
     }
     public function index()
     {
@@ -28,7 +29,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('add_tag');
     }
 
     /**
@@ -39,7 +40,14 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'tagname' => 'required|min:2|max:100',
+        );
+        $this->validate($request, $rules);
+        $tag = new Tag();
+        $tag->tagname = $request->tagname;
+        $tag->save();
+        return redirect('/'); //change the redirect later
     }
 
     /**
@@ -76,6 +84,11 @@ class TagController extends Controller
         //
     }
 
+    public function showdelete($id)
+    {
+        $tag = Tag::findOrFail($id);
+        return view('delete_tag', compact('tag'));
+    }
     /**
      * Remove the specified resource from storage.
      *

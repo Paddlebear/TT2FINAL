@@ -60,9 +60,6 @@
                         <x-dropdown-link :href="route('admintags')" :active="request()->routeIs('admintags')">
                             {{ __('messages.All Tags') }}
                         </x-dropdown-link>
-                        <x-dropdown-link :href="route('admingenres')" :active="request()->routeIs('admingenres')">
-                            {{ __('messages.All Genres') }}
-                        </x-dropdown-link>
                         @endcan
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

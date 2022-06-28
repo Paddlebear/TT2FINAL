@@ -49,7 +49,7 @@
             <label for="listname">{{ __('messages.Name') }}: </label>
             <input type="text" name="listname" id="listname">
             <label for="description">{{ __('messages.Description') }}: </label>
-            <input type="text" name="description" id="book_authors">
+            <input type="text" name="description" id="description">
             <input type="submit" value="{{ __('messages.Create') }}">
             @if (count($errors) > 0)
             <div>

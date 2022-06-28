@@ -47,21 +47,24 @@
                 <td> {{ $tag->tagname }} </td>
                 @auth
                 @can('is-admin')
-                <td><form method="POST" action="{{action([App\Http\Controllers\AdminController::class, 'deletetag'], $tag->id) }}">
-                        @csrf @method('DELETE')<input type="submit" value="{{ __('messages.Delete') }}"></form></td>@endcan @endauth
+                <td><input type="button" value="{{ __('messages.Delete') }}" onclick="deleteTag({{ $tag->id }})"></td>@endcan @endauth
                 @endforeach
         </table>
         @endif
+        @auth<p> <input type="button" value="{{ __('messages.New Tag') }}" onclick="addTag({})"> </p>@endauth
 <!--        <p> <input type="button" value="Search books" onclick="filterBooks({})"> </p>-->
         <script> ///sample code for later
-            function addBook() {
-                window.location.href = "/add_book";
+            function addTag() {
+                window.location.href = "/add_tag";
             }
             function editBook(id) {
                 window.location.href = "/edit_book/" + id;
             }
             function filterBooks() {
                 window.location.href = "filter";
+            }
+            function deleteTag(id) {
+            window.location.href = "/admin/tags/" + id;
             }
         </script>
     </body>

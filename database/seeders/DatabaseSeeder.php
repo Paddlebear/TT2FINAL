@@ -35,6 +35,9 @@ class DatabaseSeeder extends Seeder
                            'email' => 'admin@example.com', 
                            'password' => bcrypt('secretadmin'),
                            'role' => 1));
+        User::create(array('name' => 'deletable',
+                           'email' => 'delete@example.com', 
+                           'password' => bcrypt('delete')));
         DB::table('genres')->insert(['genrename' => 'Romance']);
         DB::table('genres')->insert(['genrename' => 'Fantasy']);
         DB::table('genres')->insert(['genrename' => 'Young Adult']);
