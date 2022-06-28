@@ -24,6 +24,12 @@
                     <x-nav-link :href="route('books')" :active="request()->routeIs('books')">
                         {{ __('messages.All Books') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('searchlists')" :active="request()->routeIs('searchlists')">
+                        {{ __('messages.Search Reading Lists') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('searchbooks')" :active="request()->routeIs('searchbooks')">
+                        {{ __('messages.Search Books') }}
+                    </x-nav-link>
                 </div>
             </div>
             @auth

@@ -35,6 +35,8 @@ Route::redirect('/', 'home')->name('home');
 Route::resource('home', ReadingListController::class);
 Route::resource('books', BookController::class, ['except' => ['index', 'create']]);
 Route::get('books', [BookController::class, 'index'])->name('books');
+Route::get('search_books', [BookController::class, 'showFilter'])->name('searchbooks');
+Route::get('search_lists', [ReadingListController::class, 'showFilter'])->name('searchlists');
 Route::get('add_book', [BookController::class, 'create'])->middleware('auth')->name('addbook');
 Route::get('add_tag', [TagController::class, 'create'])->middleware('auth.admin')->name('addtag');
 Route::get('add_reading_list/{id}', [ReadingListController::class, 'create'])->middleware('auth')->name('addlist');
@@ -48,6 +50,8 @@ Route::post('list/update', [ReadingListController::class, 'update'])->middleware
 Route::get('profile/{name}', [ReadingListController::class, 'userlist'])->middleware('auth')->name('userlist');
 Route::get('add_to_list/{bookid}/{userid}', [ReadingListController::class, 'edit'])->middleware('auth')->name('addtolist');
 Route::post('add_to_list', [ReadingListController::class, 'addlist'])->middleware('auth')->name('addtolistupdate');
+Route::get('add_tags_to_list/{listid}', [ReadingListController::class, 'edittags'])->middleware('auth')->name('addtagtolist');
+Route::post('add_tags_to_list', [ReadingListController::class, 'addlisttags'])->middleware('auth')->name('addtagtolistupdate');
 Route::get('admin/lists', [AdminController::class, 'adminlist'])->middleware('auth.admin')->name('adminlist');
 Route::get('admin/books', [AdminController::class, 'adminbook'])->middleware('auth.admin')->name('adminbook');
 Route::get('admin/users', [AdminController::class, 'adminuser'])->middleware('auth.admin')->name('adminuser');

@@ -61,10 +61,15 @@
 <!--        <p> <input type="button" value="Search books" onclick="filterBooks({})"> </p>-->
         <script> ///sample code for later
             function addBook() {
-                window.location.href = "/add_book";
+            window.location.href = "/add_book";
             }
             function filterBooks() {
-                window.location.href = "filter";
+            window.location.href = "filter";
+            }
+            var msg = '{{Session::get('alert')}}';
+            var exist = '{{Session::has('alert')}}';
+            if (exist){
+            alert(msg);
             }
         </script>
     </body>

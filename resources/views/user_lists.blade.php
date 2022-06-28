@@ -61,6 +61,7 @@
                     @auth
                     @if (Auth::id() == $list -> user_id)
                     <td><input type="button" value="{{ __('messages.Update') }}" onclick="editList({{ $list->id }})"></td>
+                    <td><input type="button" value="{{ __('messages.Add tags') }}" onclick="addTags({{ $list->id }})"></td>
                     <td><input type="button" value="{{ __('messages.Delete list') }}" onclick="deleteList({{ $list->id }})"></td>
                     @endif
                     @endauth
@@ -93,6 +94,9 @@
             }
             function editList(id) {
                 window.location.href = "/edit_list/" + id;
+            }
+            function addTags(id) {
+                window.location.href = "/add_tags_to_list/" + id;
             }
 //            function filterBooks() {
 //                window.location.href = "filter";
