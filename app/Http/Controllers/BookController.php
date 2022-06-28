@@ -128,4 +128,56 @@ class BookController extends Controller
         Book::findOrFail($id)->delete();
         return redirect('/'); //this def needs to be changed
     }
+    public function showFilter()
+    {
+        $genres = Genre::all()->map(function ($genre) {
+            $genre->value = $genre->id;
+            return $genre;
+	   });
+        return view('filterbooks', compact('genres'));
+    }
+    public function filter(Request $request)
+    {
+        $rules;
+        if ($request->year_from != null) {
+            $year_from = $request->year_from;
+            $rules = array(
+                'title' => 'nullable|min:2|max:100',
+                'author' => 'nullable|min:2|max:100',
+                'year_from' => 'nullable|integer|min:0|max:'.(date('Y')),
+                'year_until' => 'nullable|integer|min:0|max:'.date('Y').'|gte:'.($year_from),
+                'genre_id' => 'nullable|exists:genres,id'
+            );
+        } else {
+            $rules = array(
+                'title' => 'nullable|min:2|max:100',
+                'author' => 'nullable|min:2|max:100',
+                'year_from' => 'nullable|integer|min:0|max:'.(date('Y')),
+                'year_until' => 'nullable|integer|min:0|max:'.date('Y'),
+                'genre_id' => 'nullable|exists:genres,id'
+            );
+        }
+        $this->validate($request, $rules);
+        $genreid = $request->genre_id;
+        $query = Book::join('genres', 'genres.id', '=', 'books.genre_id');
+        if ($genreid != null && $genreid > 1) {
+            $query = $query->where('books.genre_id','=',$genreid);
+        }
+        if ($request->title != null) {
+            $query = $query->where('books.booktitle', 'LIKE', '%' . $request->title . '%');
+        }
+        if ($request->author != null) {
+            $query = $query->where('books.author', 'LIKE', '%' . $request->author . '%');
+        }
+        if ($request->year_from != null) {
+            $query = $query->where('books.publicationyear', '>=', $request->year_from);
+        }
+
+        if ($request->year_until != null) {
+            $query = $query->where('books.publicationyear', '<=', $request->year_until);
+        }
+        $query = $query->select('books.*', 'genres.genrename');
+        //echo $request->year_from;
+        return view('searchbooks', array('books' => $query->orderBy('id')->get()));
+    }
 }

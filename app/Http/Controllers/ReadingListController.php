@@ -129,7 +129,7 @@ class ReadingListController extends Controller {
 
     public function edittags($listid) {
         $list = ReadingList::findOrFail($listid);
-        $tags = DB::table('tags')->select('tags.id', 'tags.tagname')->get();
+        $tags = DB::table('tags')->select('tags.id', 'tags.tagname')->where('tags.id', '!=', 1)->get();
         return view('add_tag_to_list', ['list' => $list, 'tags' => $tags]);
     }
 
@@ -186,5 +186,36 @@ class ReadingListController extends Controller {
         ReadingList::findOrFail($id)->delete();
         return redirect('/');
     }
-
+    public function showFilter()
+    {
+        $tags = DB::table('tags')->select('tags.id', 'tags.tagname')->get();
+        return view('filterlists', compact('tags'));
+    }
+    public function filter(Request $request)
+    {
+        $rules = array(
+                'listname' => 'nullable|min:2|max:100',
+                'name' => 'nullable|min:2|max:100',
+                'tag_id' => 'nullable|exists:genres,id'
+            );
+        $this->validate($request, $rules);
+        $tagid = $request->tag_id;
+        //$query = DB::table('users')->join('reading_lists', 'users.id', '=', 'reading_lists.user_id')->
+                //join('reading_list_tag', 'reading_lists.id', '=', 'reading_list_tag.reading_list_id')->
+                //select('reading_lists.*', 'users.name')->get();
+        $query = User::join('reading_lists', 'users.id', '=', 'reading_lists.user_id');
+        $query = $query->join('reading_list_tag', 'reading_lists.id', '=', 'reading_list_tag.reading_list_id');
+        if ($tagid != null && $tagid > 1) {
+            $query = $query->where('reading_list_tag.tag_id','=',$tagid);
+        }
+        if ($request->listname != null) {
+            $query = $query->where('reading_lists.listname', 'LIKE', '%' . $request->listname . '%');
+        }
+        if ($request->name != null) {
+            $query = $query->where('users.name', 'LIKE', '%' . $request->name . '%');
+        }
+        $query = $query->select('reading_lists.*', 'users.name')->where('reading_lists.visible','=', 1);
+        //echo $request->year_from;
+        return view('searchlists', array('lists' => $query->orderBy('id')->get()));
+    }
 }
