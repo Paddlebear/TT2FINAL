@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Update book</title>
+        <title>{{ __('messages.Add book to list') }} - Reading Recs</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -31,19 +31,19 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>-->
             @else
-            <a href="{{ route('login') }}">Log in</a>
+            <a href="{{ route('login') }}">{{ __('messages.Log in') }}</a>
 
             @if (Route::has('register'))
-            <a href="{{ route('register') }}">Register</a>
+            <a href="{{ route('register') }}">{{ __('messages.Register') }}</a>
             @endif
             @endauth
         </div>
         @endif
         @include('layouts.navigation')
         @if (count($lists) == 0)
-        <p color='red'>You don't have any reading lists! You might want to create one... (through the dropdown)</p>
+        <p color='red'>{{ __('messages.nolist') }}</p>
         @else
-        Add <b>{{ $book->booktitle }} to one of your reading lists... user id: {{$userid}}</b>:
+        {{ __('messages.addtolist', ['title' => $book->booktitle]) }}:
         <form method="POST" action="/add_to_list">
             @csrf
             <input type="hidden" name="book_id" value="{{ $book->id }}">
@@ -53,7 +53,7 @@
             <input type="text" name="author" id="author" value="{{ $book->author }}">
             <label for="publicationyear">Publication year: </label>
             <input type="number" name="publicationyear" id="publicationyear" value="{{ $book->publicationyear }}">-->
-            <label for="list_select">Lists: </label>
+            <label for="list_select">{{ __('messages.Reading Lists') }}: </label>
             <select id="list_select" name="reading_list_id"></select>
             <input type="submit" value="update">
             @if (count($errors) > 0)

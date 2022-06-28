@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Add new book to system - Reading Recs</title>
+        <title>{{ __('messages.Add new book to system') }} - Reading Recs</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -31,28 +31,28 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>-->
             @else
-            <a href="{{ route('login') }}">Log in</a>
+            <a href="{{ route('login') }}">{{ __('messages.Log in') }}</a>
 
             @if (Route::has('register'))
-            <a href="{{ route('register') }}">Register</a>
+            <a href="{{ route('register') }}">{{ __('messages.Register') }}</a>
             @endif
             @endauth
         </div>
         @endif
         @include('layouts.navigation')
-        <p>We will add a book to the Reading Recs database:</p>
+        <p>{{ __('messages.We will add a book to the Reading Recs database') }}:</p>
         <form method="POST"
               action="{{action([App\Http\Controllers\BookController::class, 'store']) }}">
             @csrf
-            <label for="booktitle">Book Name: </label>
+            <label for="booktitle">{{ __('messages.Book Title') }}:</label>
             <input type="text" name="booktitle" id="booktitle">
-            <label for="author">Author: </label>
+            <label for="author">{{ __('messages.Author') }}:</label>
             <input type="text" name="author" id="author">
-            <label for="publicationyear">Publication Year </label>
+            <label for="publicationyear">{{ __('messages.Publication Year') }}:</label>
             <input type="number" name="publicationyear" id="publicationyear">
-            <label for="genre_select">Genre: </label>
+            <label for="genre_select">{{ __('messages.Genre') }}:</label>
             <select id="genre_select" name="genre_id"></select> <!-- make a genre table and a spinner a la book search from the other project -->
-            <input type="submit" value="add">
+            <input type="submit" value="{{ __('messages.Add') }}">
             @if (count($errors) > 0)
             <div>
                 <ul>

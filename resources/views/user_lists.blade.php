@@ -18,56 +18,56 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body>
-                @if (Route::has('login'))
+        @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
-<!--            <a href="{{ url('/home') }}">Homepage</a>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
+            <!--            <a href="{{ url('/home') }}">Homepage</a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+            
+                            <x-dropdown-link :href="route('logout')"
+                                             onclick="event.preventDefault();
+                                                 this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                           </x-dropdown-link>-->
+            @else
+            <a href="{{ route('login') }}">{{ __('messages.Log in') }}</a>
 
-                <x-dropdown-link :href="route('logout')"
-                                 onclick="event.preventDefault();
-                                     this.closest('form').submit();">
-                    {{ __('Log Out') }}
-               </x-dropdown-link>-->
-                @else
-                <a href="{{ route('login') }}">Log in</a>
-
-                @if (Route::has('register'))
-                <a href="{{ route('register') }}">Register</a>
-                @endif
-                @endauth
+            @if (Route::has('register'))
+            <a href="{{ route('register') }}">{{ __('messages.Register') }}</a>
+            @endif
+            @endauth
         </div>
         @endif
         @include('layouts.navigation')
         <main>
 
-          @if (count($lists) == 0)
-        <p color='red'> There are no records in the database!</p>
-        @else
-        <table style="border: 1px solid black">
-            <tr>
-                <td> Name </td>
-                <td> By: </td>
-                <td> Description </td>
-                <td> </td>
-            </tr>
-            @foreach ($lists as $list)
-            <tr>
-                <td> {{ $list->listname }} </td>
-                <td> {{ $list->name }} </td>
-                <td> {{ $list->description }} </td>
-                <td><input type="button" value="See list contents" onclick="seeList('{{$list->listname}}')"></td>
-                @auth
-                <td><input type="button" value="Delete list" onclick="deleteList({{ $list->id }})"></td>
-                @endauth
-                @endforeach
-        </table>
-        @endif
-        @auth
-        <p> <input type="button" value="New List (in development)" onclick="addList({{Auth::id()}})"> </p>
-        @endauth
-<!--        <p> <input type="button" value="Search books" onclick="filterBooks({})"> </p>-->
+            @if (count($lists) == 0)
+            <p color='red'>{{ __('messages.norecords') }}</p>
+            @else
+            <table style="border: 1px solid black">
+                <tr>
+                    <td> {{ __('messages.Name') }}</td>
+                    <td> {{ __('messages.By') }}: </td>
+                    <td> {{ __('messages.Description') }}</td>
+                    <td> </td>
+                </tr>
+                @foreach ($lists as $list)
+                <tr>
+                    <td> {{ $list->listname }} </td>
+                    <td> {{ $list->name }} </td>
+                    <td> {{ $list->description }} </td>
+                    <td><input type="button" value="{{ __('messages.See list contents') }}" onclick="seeList('{{$list->listname}}')"></td>
+                    @auth
+                    <td><input type="button" value="{{ __('messages.Delete list') }}" onclick="deleteList({{ $list->id }})"></td>
+                    @endauth
+                    @endforeach
+            </table>
+            @endif
+            @auth
+            <p> <input type="button" value="{{ __('messages.New list') }}" onclick="addList({{Auth::id()}})"> </p>
+            @endauth
+    <!--        <p> <input type="button" value="Search books" onclick="filterBooks({})"> </p>-->
         </main>
         <script> ///sample code for later
             function seeBooks() {

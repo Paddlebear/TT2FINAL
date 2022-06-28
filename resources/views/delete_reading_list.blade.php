@@ -31,16 +31,16 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>-->
             @else
-            <a href="{{ route('login') }}">Log in</a>
+            <a href="{{ route('login') }}">{{ __('messages.Log in') }}</a>
 
             @if (Route::has('register'))
-            <a href="{{ route('register') }}">Register</a>
+            <a href="{{ route('register') }}">{{ __('messages.Register') }}</a>
             @endif
             @endauth
         </div>
         @endif
         @include('layouts.navigation')
-        Are you sure you want to delete this list with id {{ $list->id }}?
+        {{ __('messages.deletelist', [''name' => $list->listname]) }}
         <td>
                     <form method="POST"
 

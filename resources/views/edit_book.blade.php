@@ -31,28 +31,28 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>-->
             @else
-            <a href="{{ route('login') }}">Log in</a>
+            <a href="{{ route('login') }}">{{ __('messages.Log in') }}</a>
 
             @if (Route::has('register'))
-            <a href="{{ route('register') }}">Register</a>
+            <a href="{{ route('register') }}">{{ __('messages.Register') }}</a>
             @endif
             @endauth
         </div>
         @endif
         @include('layouts.navigation')
-        Update record with title <b>{{ $book->booktitle }}</b>:
+        {{ __('messages.updatebook', ['name' => $book->booktitle])}}:
         <form method="POST" action="/book/update">
             @csrf
             <input type="hidden" name="id" value="{{ $book->id }}">
-            <label for="booktitle">Title: </label>
+            <label for="booktitle">{{ __('messages.Book Title') }}: </label>
             <input type="text" name="booktitle" id="booktitle" value="{{ $book->booktitle }}">
-            <label for="author">Author: </label>
+            <label for="author">{{ __('messages.Author') }}: </label>
             <input type="text" name="author" id="author" value="{{ $book->author }}">
-            <label for="publicationyear">Publication year: </label>
+            <label for="publicationyear">{{ __('messages.Publication Year') }}: </label>
             <input type="number" name="publicationyear" id="publicationyear" value="{{ $book->publicationyear }}">
-            <label for="genre_select">Genre: </label>
+            <label for="genre_select">{{ __('messages.Genre') }}: </label>
             <select id="genre_select" name="genre_id"></select>
-            <input type="submit" value="update">
+            <input type="submit" value="{{ __('messages.Update') }}">
             @if (count($errors) > 0)
             <div>
                 <ul>

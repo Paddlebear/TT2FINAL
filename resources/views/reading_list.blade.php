@@ -18,31 +18,31 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body>
-@if (Route::has('login'))
+        @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
-<!--            <a href="{{ url('/home') }}">Homepage</a>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
+            <!--            <a href="{{ url('/home') }}">Homepage</a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+            
+                            <x-dropdown-link :href="route('logout')"
+                                             onclick="event.preventDefault();
+                                                 this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                           </x-dropdown-link>-->
+            @else
+            <a href="{{ route('login') }}">{{ __('messages.Log in') }}</a>
 
-                <x-dropdown-link :href="route('logout')"
-                                 onclick="event.preventDefault();
-                                     this.closest('form').submit();">
-                    {{ __('Log Out') }}
-               </x-dropdown-link>-->
-                @else
-                <a href="{{ route('login') }}">Log in</a>
-
-                @if (Route::has('register'))
-                <a href="{{ route('register') }}">Register</a>
-                @endif
-                @endauth
+            @if (Route::has('register'))
+            <a href="{{ route('register') }}">{{ __('messages.Register') }}</a>
+            @endif
+            @endauth
         </div>
         @endif
         @include('layouts.navigation')
-    {{$list[0]->listname}} by {{$list[0]->name}}:
+        {{$list[0]->listname}} - {{$list[0]->name}}:
         @if (count($books) == 0)
-        <p color='red'>This reading list is empty.</p>
+        <p color='red'>{{ __('messages.emptylist') }}</p>
         @else
         <table style="border: 1px solid black">
             @foreach ($books as $book)
@@ -52,18 +52,18 @@
                 <td> {{ $book->publicationyear }} </td>
                 <td> {{ $book->genrename }} </td>
                 @endforeach
-        @endif        
+                @endif        
         </table>
         <p></p>
         @if (count($tags) == 0)
-        <p color='red'>This reading list has no tags.</p>
+        <p color='red'>{{ __('messages.emptytags') }}</p>
         @else
         <table style="border: 1px solid black">
             @foreach ($tags as $tag)
             <tr>
                 <td> {{ $tag->tagname }} </td>
                 @endforeach
-        @endif
+                @endif
         </table>
     </body>
 </html>

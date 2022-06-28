@@ -31,26 +31,26 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>-->
             @else
-            <a href="{{ route('login') }}">Log in</a>
+            <a href="{{ route('login') }}">{{ __('messages.Log in') }}</a>
 
             @if (Route::has('register'))
-            <a href="{{ route('register') }}">Register</a>
+            <a href="{{ route('register') }}">{{ __('messages.Register') }}</a>
             @endif
             @endauth
         </div>
         @endif
         @include('layouts.navigation')
-        We will add a new list to the system.
+        {{ __('messages.We will add a new list to the system.') }}
         <form method="POST"
               action="{{action([App\Http\Controllers\ReadingListController::class, 'store']) }}">
             @csrf
             <input type="hidden" name="user_id" value="{{$user->id}}">
             <input type="hidden" name="visible" value=1>
-            <label for="listname">Reading List Name: </label>
+            <label for="listname">{{ __('messages.Name') }}: </label>
             <input type="text" name="listname" id="listname">
-            <label for="description">Description: </label>
+            <label for="description">{{ __('messages.Description') }}: </label>
             <input type="text" name="description" id="book_authors">
-            <input type="submit" value="add">
+            <input type="submit" value="{{ __('messages.Create') }}">
             @if (count($errors) > 0)
             <div>
                 <ul>

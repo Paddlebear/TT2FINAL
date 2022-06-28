@@ -31,24 +31,23 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>-->
             @else
-            <a href="{{ route('login') }}">Log in</a>
+            <a href="{{ route('login') }}">{{ __('messages.Log in') }}</a>
 
             @if (Route::has('register'))
-            <a href="{{ route('register') }}">Register</a>
+            <a href="{{ route('register') }}">{{ __('messages.Register') }}</a>
             @endif
             @endauth
         </div>
         @endif
         @include('layouts.navigation')
-        Welcome, admin!
         @if (count($users) == 0)
-        <p color='red'> There are no records in the database!</p>
+        <p color='red'>{{ __('messages.norecords') }}</p>
         @else
         <table style="border: 1px solid black">
             <tr>
                 <td> ID </td>
-                <td> Username </td>
-                <td> E-mail </td>
+                <td>{{ __('messages.Username') }}</td>
+                <td>{{ __('messages.E-mail') }}</td>
                 <td> </td>
             </tr>
             @foreach ($users as $user)
@@ -56,7 +55,7 @@
                 <td> {{ $user->id }} </td>
                 <td> {{ $user->name }} </td>
                 <td> {{ $user->email }} </td>
-                <td><input type="button" value="Delete user" onclick="deleteUser('{{$user->id}}')"></td>
+                <td><input type="button" value="{{ __('messages.Delete user') }}" onclick="deleteUser('{{$user->id}}')"></td>
                 @endforeach
         </table>
         @endif

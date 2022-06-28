@@ -31,22 +31,18 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>-->
             @else
-            <a href="{{ route('login') }}">Log in</a>
+            <a href="{{ route('login') }}">{{ __('messages.Log in') }}</a>
 
             @if (Route::has('register'))
-            <a href="{{ route('register') }}">Register</a>
+            <a href="{{ route('register') }}">{{ __('messages.Register') }}</a>
             @endif
             @endauth
         </div>
         @endif
         @include('layouts.navigation')
-        Are you sure you want to delete this user with id {{ $user->id }}?
-        <td>
-                    <form method="POST"
-
-                          action="{{action([App\Http\Controllers\AdminController::class, 'delete'], $user->id) }}">
-                        @csrf @method('DELETE')<input type="submit"
-                                                      value="delete"></form> </td>
-                </td>
-    </body>
+        {{ __('messages.deleteuser', ['name' => $user->name]) }}
+        <form method="POST"
+        action="{{action([App\Http\Controllers\AdminController::class, 'delete'], $user->id) }}">
+            @csrf @method('DELETE')<input type="submit" value="delete"></form>
+</body>
 </html>

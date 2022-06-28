@@ -13,10 +13,10 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                        {{ __('All Reading Lists') }}
+                        {{ __('messages.All Reading Lists') }}
                     </x-nav-link>
                     <x-nav-link :href="route('books')" :active="request()->routeIs('books')">
-                        {{ __('All Books') }}
+                        {{ __('messages.All Books') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -39,14 +39,14 @@
                     <x-slot name="content">
                         <!-- Authentication -->
                             <x-dropdown-link :href="route('userlist', Auth::user()->name)" :active="request()->routeIs('userlist', Auth::user()->name)">
-                                {{ __('Profile') }}
+                                {{ __('messages.Profile') }}
                             </x-dropdown-link>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                             <x-dropdown-link :href="route('logout')"
                                              onclick="event.preventDefault();
                                                      this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('messages.Log Out') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -68,7 +68,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                {{ __('All Reading Lists') }}
+                {{ __('messages.All Reading Lists') }}
             </x-responsive-nav-link>
         </div>
 
@@ -86,7 +86,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                                            onclick="event.preventDefault();
                                                    this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('messages.Log Out') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
