@@ -18,7 +18,7 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (Gate::denies('is-admin')) {
-            return redirect('dashboard')->withErrors('Access denied to admin functionality!');
+            return redirect('home')->withErrors('Access denied to admin functionality!');
         }
         return $next($request);
     }

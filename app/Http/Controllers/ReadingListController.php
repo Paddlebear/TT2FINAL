@@ -42,7 +42,7 @@ class ReadingListController extends Controller
         $user = DB::table('users')->select('users.*')->where('name', '=', $name)->get();
         $id = $user[0]->id;
         $lists = DB::table('reading_lists')->join('users', 'reading_lists.user_id', '=', 'users.id')
-                ->select('reading_lists.id','reading_lists.listname', 'users.name', 'reading_lists.description')->where('users.name', '=', $name)->get();
+                ->select('reading_lists.*','users.name')->where('users.name', '=', $name)->get();
         return view ('user_lists', ['lists' => $lists, 'user' => $name]);
         //return view('user_lists', ['user' => $name]);
     }

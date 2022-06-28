@@ -6,9 +6,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Genre;
+use App\Models\Tag;
 
 class BookController extends Controller
 {
+    public function __construct() {
+        // only Admins have access to the following methods
+        $this->middleware('auth.admin')->only(['show', 'update', 'destroy', 'destroytag']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -68,7 +73,11 @@ class BookController extends Controller
     public function show($id) ///only available for admins
     {
         $book = Book::findOrFail($id);
-        return view('edit_book', compact('book'));
+        $genres = Genre::all()->map(function ($genre) {
+            $genre->value = $genre->id;
+            return $genre;
+	   });
+        return view('edit_book', ['book' => $book, 'genres' => $genres]);
     }
 
     /**
@@ -88,7 +97,7 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) ///only available for admins
+    public function update(Request $request) ///only available for admins
     {
         $rules = array(
             'booktitle' => 'required|min:2|max:200',
@@ -115,6 +124,7 @@ class BookController extends Controller
     public function destroy($id) ///only available for admins
     {
         DB::table('book_tag')->where('book_id', '=', $id)->delete();
+        DB::table('book_reading_list')->where('book_id', '=', $id)->delete();
         Book::findOrFail($id)->delete();
         return redirect('/'); //this def needs to be changed
     }

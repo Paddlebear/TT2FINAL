@@ -21,6 +21,10 @@ class LanguageMiddleware
         $lang = $request->cookie('language');
         if (!empty($lang)) {
             App::setLocale($lang);
+        }
+        if(session()->has('locale')) {
+            app()->setLocale(session('locale'));
+            app()->setLocale(config('app.locale'));
         }        
         return $next($request);
     }

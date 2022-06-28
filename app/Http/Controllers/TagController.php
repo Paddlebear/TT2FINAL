@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Tag;
 
 class TagController extends Controller
 {
@@ -11,6 +12,10 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct() {
+        // only Admins have access to the following methods
+        $this->middleware('auth.admin')->only(['destroy']);
+    }
     public function index()
     {
         //
@@ -79,6 +84,9 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('book_tag')->where('tag_id', '=', $id)->delete();
+        DB::table('reading_list_tag')->where('tag_id', '=', $id)->delete();
+        Tag::findOrFail($id)->delete();
+        return redirect('/');
     }
 }

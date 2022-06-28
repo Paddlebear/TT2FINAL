@@ -3,7 +3,12 @@
     <type>org.netbeans.modules.php.project</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
-            <name>laravel/laravel</name>
+            <name>tt2finalag</name>
         </data>
+	<spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>endcan</word>
+            <word>endempty</word>
+            <word>endisset</word>
+        </spellchecker-wordlist>
     </configuration>
 </project>

@@ -42,7 +42,7 @@
         @include('layouts.navigation')
         {{ __('messages.deleteuser', ['name' => $user->name]) }}
         <form method="POST"
-        action="{{action([App\Http\Controllers\AdminController::class, 'delete'], $user->id) }}">
+        action="{{action([App\Http\Controllers\AdminController::class, 'deleteuser'], $user->id) }}">
             @csrf @method('DELETE')<input type="submit" value="delete"></form>
 </body>
 </html>

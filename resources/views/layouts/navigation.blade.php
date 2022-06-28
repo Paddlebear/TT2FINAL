@@ -5,8 +5,14 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('home') }}">
+                    <a style="padding:10px;" href="{{ route('home') }}">
                         Reading Recs
+                    </a>
+                    <a style="padding:10px;" href="{{ route('locale.setting', 'en') }}">
+                        EN
+                    </a>
+                    <a style="padding:10px;" href="{{ route('locale.setting', 'lv') }}">
+                        LV
                     </a>
                 </div>
 
@@ -38,11 +44,28 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
-                            <x-dropdown-link :href="route('userlist', Auth::user()->name)" :active="request()->routeIs('userlist', Auth::user()->name)">
-                                {{ __('messages.Profile') }}
-                            </x-dropdown-link>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
+                        <x-dropdown-link :href="route('userlist', Auth::user()->name)" :active="request()->routeIs('userlist', Auth::user()->name)">
+                            {{ __('messages.Profile') }}
+                        </x-dropdown-link>
+                        @can('is-admin')
+                        <x-dropdown-link :href="route('adminlist')" :active="request()->routeIs('adminlist')">
+                            {{ __('messages.All Reading Lists') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('adminbook')" :active="request()->routeIs('adminbook')">
+                            {{ __('messages.All Books') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('adminuser')" :active="request()->routeIs('adminuser')">
+                            {{ __('messages.All Users') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('admintags')" :active="request()->routeIs('admintags')">
+                            {{ __('messages.All Tags') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('admingenres')" :active="request()->routeIs('admingenres')">
+                            {{ __('messages.All Genres') }}
+                        </x-dropdown-link>
+                        @endcan
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
                             <x-dropdown-link :href="route('logout')"
                                              onclick="event.preventDefault();
                                                      this.closest('form').submit();">
@@ -52,6 +75,7 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @endauth
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
@@ -63,7 +87,7 @@
             </div>
         </div>
     </div>
-
+    @auth
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
@@ -91,6 +115,6 @@
                 </form>
             </div>
         </div>
+        @endauth
     </div>
-    @endauth
 </nav>

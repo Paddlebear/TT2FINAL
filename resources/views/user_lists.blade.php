@@ -59,13 +59,17 @@
                     <td> {{ $list->description }} </td>
                     <td><input type="button" value="{{ __('messages.See list contents') }}" onclick="seeList('{{$list->listname}}')"></td>
                     @auth
+                    @if (Auth::id() == $list -> user_id)
                     <td><input type="button" value="{{ __('messages.Delete list') }}" onclick="deleteList({{ $list->id }})"></td>
+                    @endif
                     @endauth
                     @endforeach
             </table>
             @endif
             @auth
+            @if (Auth::id() == $lists[0] -> user_id)
             <p> <input type="button" value="{{ __('messages.New list') }}" onclick="addList({{Auth::id()}})"> </p>
+            @endif
             @endauth
     <!--        <p> <input type="button" value="Search books" onclick="filterBooks({})"> </p>-->
         </main>
