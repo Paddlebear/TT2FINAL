@@ -83,7 +83,7 @@
             function seeProfile(name) {
             window.location.href = "/profile/" + name;
             }
-            
+
 //            function filterBooks() {
 //                window.location.href = "filter";
 //            }

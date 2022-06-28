@@ -40,6 +40,7 @@
         </div>
         @endif
         @include('layouts.navigation')
+        <main>
         {{$list[0]->listname}} - {{$list[0]->name}}:
         @if (count($books) == 0)
         <p color='red'>{{ __('messages.emptylist') }}</p>
@@ -65,5 +66,6 @@
                 @endforeach
                 @endif
         </table>
+        </main>
     </body>
 </html>

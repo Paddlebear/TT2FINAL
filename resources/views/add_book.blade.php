@@ -40,6 +40,7 @@
         </div>
         @endif
         @include('layouts.navigation')
+        <main>
         <p>{{ __('messages.We will add a book to the Reading Recs database') }}:</p>
         <form method="POST"
               action="{{action([App\Http\Controllers\BookController::class, 'store']) }}">
@@ -93,5 +94,6 @@
             }
             });
         </script>
+        </main>
     </body>
 </html>

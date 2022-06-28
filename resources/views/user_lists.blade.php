@@ -93,10 +93,10 @@
             window.location.href = "/reading_lists/" + listname;
             }
             function editList(id) {
-                window.location.href = "/edit_list/" + id;
+            window.location.href = "/edit_list/" + id;
             }
             function addTags(id) {
-                window.location.href = "/add_tags_to_list/" + id;
+            window.location.href = "/add_tags_to_list/" + id;
             }
 //            function filterBooks() {
 //                window.location.href = "filter";

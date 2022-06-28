@@ -40,22 +40,24 @@
         </div>
         @endif
         @include('layouts.navigation')
-        {{ __('messages.We will add a new tag to the system.') }}
-        <form method="POST"
-              action="{{action([App\Http\Controllers\TagController::class, 'store']) }}">
-            @csrf
-            <label for="tagname">{{ __('messages.Name') }}: </label>
-            <input type="text" name="tagname" id="tagname">
-            <input type="submit" value="{{ __('messages.Create') }}">
-            @if (count($errors) > 0)
-            <div>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-        </form>
+        <main>
+            {{ __('messages.We will add a new tag to the system.') }}
+            <form method="POST"
+                  action="{{action([App\Http\Controllers\TagController::class, 'store']) }}">
+                @csrf
+                <label for="tagname">{{ __('messages.Name') }}: </label>
+                <input type="text" name="tagname" id="tagname">
+                <input type="submit" value="{{ __('messages.Create') }}">
+                @if (count($errors) > 0)
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+            </form>
+        </main>
     </body>
 </html>

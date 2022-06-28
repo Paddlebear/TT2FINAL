@@ -31,43 +31,45 @@
         </div>
         @endif
         @include('layouts.navigation')
-        @if (count($books) == 0)
-        <p color='red'> {{ __('messages.norecords') }}</p>
-        @else
-        <table style="border: 1px solid black">
-            <tr>
-                <!--<td> ID </td> -->
-                <td> {{ __('messages.Book Title') }}</td>
-                <td> {{ __('messages.Author') }}</td>
-                <td> {{ __('messages.Publication Year') }}</td>
-                <td> {{ __('messages.Genre') }}</td>
-                <td> </td>
-            </tr>
-            @foreach ($books as $book)
-            <tr>
-                <td> {{ $book->booktitle }} </td>
-                <td> {{ $book->author }} </td>
-                <td> {{ $book->publicationyear }} </td>
-                <td> {{ $book->genrename }} </td>
-                @auth
-                @can('is-admin')<td> <input type="button" value="{{ __('messages.Update') }}" onclick="editBook({{ $book->id }})"> </td>
-                <td><form method="POST" action="{{action([App\Http\Controllers\BookController::class, 'destroy'], $book->id) }}">
-                        @csrf @method('DELETE')<input type="submit" value="{{ __('messages.Delete') }}"></form></td>@endcan @endauth
-                @endforeach
-        </table>
-        @endif
-        @auth<p> <input type="button" value="{{ __('messages.New Book') }}" onclick="addBook({})"> </p>@endauth
-<!--        <p> <input type="button" value="Search books" onclick="filterBooks({})"> </p>-->
-        <script> ///sample code for later
-            function addBook() {
+        <main>
+            @if (count($books) == 0)
+            <p color='red'> {{ __('messages.norecords') }}</p>
+            @else
+            <table style="border: 1px solid black">
+                <tr>
+                    <!--<td> ID </td> -->
+                    <td> {{ __('messages.Book Title') }}</td>
+                    <td> {{ __('messages.Author') }}</td>
+                    <td> {{ __('messages.Publication Year') }}</td>
+                    <td> {{ __('messages.Genre') }}</td>
+                    <td> </td>
+                </tr>
+                @foreach ($books as $book)
+                <tr>
+                    <td> {{ $book->booktitle }} </td>
+                    <td> {{ $book->author }} </td>
+                    <td> {{ $book->publicationyear }} </td>
+                    <td> {{ $book->genrename }} </td>
+                    @auth
+                    @can('is-admin')<td> <input type="button" value="{{ __('messages.Update') }}" onclick="editBook({{ $book->id }})"> </td>
+                    <td><form method="POST" action="{{action([App\Http\Controllers\BookController::class, 'destroy'], $book->id) }}">
+                            @csrf @method('DELETE')<input type="submit" value="{{ __('messages.Delete') }}"></form></td>@endcan @endauth
+                    @endforeach
+            </table>
+            @endif
+            @auth<p> <input type="button" value="{{ __('messages.New Book') }}" onclick="addBook({})"> </p>@endauth
+    <!--        <p> <input type="button" value="Search books" onclick="filterBooks({})"> </p>-->
+            <script> ///sample code for later
+                function addBook() {
                 window.location.href = "/add_book";
-            }
-            function editBook(id) {
+                }
+                function editBook(id) {
                 window.location.href = "/edit_book/" + id;
-            }
-            function filterBooks() {
+                }
+                function filterBooks() {
                 window.location.href = "filter";
-            }
-        </script>
+                }
+            </script>
+        </main>
     </body>
 </html>

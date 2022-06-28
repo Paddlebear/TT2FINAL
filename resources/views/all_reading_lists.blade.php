@@ -55,7 +55,7 @@
                 @foreach ($lists as $list)
                 <tr>
                     <td> {{ $list->listname }} </td>
-                    <td> {{ $list->name }} </td>
+                    <td><a href="{{ route('userlist', $list->name ) }}">{{ $list->name }}</a></td>
                     <td> {{ $list->description }} </td>
                     <td><input type="button" value="{{ __('messages.See list contents') }}" onclick="seeList('{{$list->listname}}')"></td>
                     @endforeach

@@ -40,13 +40,15 @@
         </div>
         @endif
         @include('layouts.navigation')
-        {{ __('messages.deletetag', ['name' => $tag->tagname]) }}
-        <td>
-                    <form method="POST"
+        <main>
+            {{ __('messages.deletetag', ['name' => $tag->tagname]) }}
+            <td>
+                <form method="POST"
 
-                          action="{{action([App\Http\Controllers\TagController::class, 'destroy'], $tag->id) }}">
-                        @csrf @method('DELETE')<input type="submit"
-                                                      value="delete"></form> </td>
-                </td>
-    </body>
+                      action="{{action([App\Http\Controllers\TagController::class, 'destroy'], $tag->id) }}">
+                    @csrf @method('DELETE')<input type="submit"
+                                                  value="delete"></form> </td>
+        </td>
+    </main>
+</body>
 </html>

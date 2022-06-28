@@ -46,7 +46,7 @@ return [
     'We will add a new tag to the system.' => 'Mēs pievienosim jaunu birku sistēmai.',
     'emptylist' => 'Šis lasīšanas saraksts ir tukšs.',
     'emptytags' => 'Šim lasīšanas sarakstam nav birku.',
-    'Search Reading Lists' => 'Meklet lasīšanas sarakstus',
+    'Search Reading Lists' => 'Meklēt lasīšanas sarakstus',
     'Search Books' => 'Meklēt grāmatas',
     'Search' => 'Meklēt',
     'Delete user' => 'Izdzēst lietotāju',

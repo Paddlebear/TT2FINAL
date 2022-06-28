@@ -40,31 +40,31 @@
         </div>
         @endif
         @include('layouts.navigation')
-        {{ __('messages.updatelist', ['name' => $list->listname])}}:
-        <form method="POST" action="/list/update">
-            @csrf
-            <input type="hidden" name="id" value="{{ $list->id }}">
-            <input type="hidden" name="user_id" value="{{ $list->user_id }}">
-            <input type="radio" id="yes" name="visible" value=1>
-            <label for="html">Visible</label><br>
-            <input type="radio" id="no" name="visible" value=0>
-            <label for="css">Hidden</label><br>
-            <label for="listname">Name: </label>
-            <input type="text" name="listname" id="listname" value="{{ $list->listname }}">
-            <label for="description">Description: </label>
-            <input type="text" name="description" id="description" value="{{ $list->description }}">
-            <input type="submit" value="{{ __('messages.Update') }}">
-            @if (count($errors) > 0)
-            <div>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-        </form>
-        <script>
-        </script>
+        <main>
+            {{ __('messages.updatelist', ['name' => $list->listname])}}:
+            <form method="POST" action="/list/update">
+                @csrf
+                <input type="hidden" name="id" value="{{ $list->id }}">
+                <input type="hidden" name="user_id" value="{{ $list->user_id }}">
+                <input type="radio" id="yes" name="visible" value=1>
+                <label for="yes">Visible</label><br>
+                <input type="radio" id="no" name="visible" value=0>
+                <label for="no">Hidden</label><br>
+                <label for="listname">Name: </label>
+                <input type="text" name="listname" id="listname" value="{{ $list->listname }}">
+                <label for="description">Description: </label>
+                <input type="text" name="description" id="description" value="{{ $list->description }}">
+                <input type="submit" value="{{ __('messages.Update') }}">
+                @if (count($errors) > 0)
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+            </form>
+        </main>
     </body>
 </html>

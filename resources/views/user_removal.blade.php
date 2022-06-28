@@ -40,9 +40,11 @@
         </div>
         @endif
         @include('layouts.navigation')
+        <main>
         {{ __('messages.deleteuser', ['name' => $user->name]) }}
         <form method="POST"
         action="{{action([App\Http\Controllers\AdminController::class, 'destroy'], $user->id) }}">
             @csrf @method('DELETE')<input type="submit" value="delete"></form>
+        </main>
 </body>
 </html>

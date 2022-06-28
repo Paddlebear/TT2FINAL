@@ -40,52 +40,54 @@
         </div>
         @endif
         @include('layouts.navigation')
-        <p>Filter lists...</p>
-        <form method="POST" action="{{ action([App\Http\Controllers\ReadingListController::class, 'filter']) }}">
-            @csrf
-            <p><label for="listname">{{ __('messages.Name or portion of it') }}: </label>
-            <input type="text" name="listname" id="listname"></p>
-            <p><label for="name">{{ __('messages.Creator or portion of it') }}: </label>
-            <input type="text" name="name" id="name"></p>
-            <p><label for="tag_select">{{ __('messages.Tag') }}: </label>
-            <select id="tag_select" name="tag_id"></select></p>
-            <p><input type="submit" value="{{ __('messages.Search') }}"></p>
-            @if (count($errors) > 0)
-            <div>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-        </form>
+        <main>
+            <p>Filter lists...</p>
+            <form method="POST" action="{{ action([App\Http\Controllers\ReadingListController::class, 'filter']) }}">
+                @csrf
+                <p><label for="listname">{{ __('messages.Name or portion of it') }}: </label>
+                    <input type="text" name="listname" id="listname"></p>
+                <p><label for="name">{{ __('messages.Creator or portion of it') }}: </label>
+                    <input type="text" name="name" id="name"></p>
+                <p><label for="tag_select">{{ __('messages.Tag') }}: </label>
+                    <select id="tag_select" name="tag_id"></select></p>
+                <p><input type="submit" value="{{ __('messages.Search') }}"></p>
+                @if (count($errors) > 0)
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+            </form>
+        </main>
         <script>
-            window.addEventListener('DOMContentLoaded', (event) => {
-                var tags = <?= json_encode($tags) ?>;
-                var tag_s = document.getElementById("tag_select");
-                var lookup = {};
-                var idents = {};
-                for (let i in tags) { // for every item in the data - every piece of statistic info
-                    let tag = tags[i].tagname; // read country from data
-                    let ident = tags[i].id;
-                    if (tag && !(tag in lookup)) { // if the continet hasn't been previously processed (is not present in lookup)
-                        lookup[tag] = {}; // add a new continent to the lookup
-                        idents[ident] = {};
-                    }
-                }
-                //console.log(lookup); // uncomment this line if you want to see the result in the console
-                var taglist = Object.keys(lookup);
-                var tagidlist = Object.keys(idents);
-                console.log(taglist); // uncomment this line if you want to see the result in the console
-                console.log(tagidlist); // uncomment this line if you want to see the result in the console
-                for (let i in taglist) { // for every continent
-                let opt = document.createElement('option'); // create a new OPTION element
-                opt.innerHTML = taglist[i]; // fill the text with the continent name
-                opt.value = tagidlist[i]; // fill the value with the continent name
-                tag_s.appendChild(opt); // add newly created OPTION to the continent SELECT element
-            }
-            });
+window.addEventListener('DOMContentLoaded', (event) => {
+    var tags = <?= json_encode($tags) ?>;
+    var tag_s = document.getElementById("tag_select");
+    var lookup = {};
+    var idents = {};
+    for (let i in tags) { // for every item in the data - every piece of statistic info
+        let tag = tags[i].tagname; // read country from data
+        let ident = tags[i].id;
+        if (tag && !(tag in lookup)) { // if the continet hasn't been previously processed (is not present in lookup)
+            lookup[tag] = {}; // add a new continent to the lookup
+            idents[ident] = {};
+        }
+    }
+    //console.log(lookup); // uncomment this line if you want to see the result in the console
+    var taglist = Object.keys(lookup);
+    var tagidlist = Object.keys(idents);
+    console.log(taglist); // uncomment this line if you want to see the result in the console
+    console.log(tagidlist); // uncomment this line if you want to see the result in the console
+    for (let i in taglist) { // for every continent
+        let opt = document.createElement('option'); // create a new OPTION element
+        opt.innerHTML = taglist[i]; // fill the text with the continent name
+        opt.value = tagidlist[i]; // fill the value with the continent name
+        tag_s.appendChild(opt); // add newly created OPTION to the continent SELECT element
+    }
+});
         </script>
     </body>
 </html>

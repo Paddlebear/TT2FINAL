@@ -31,41 +31,43 @@
         </div>
         @endif
         @include('layouts.navigation')
-        @if (count($tags) == 0)
-        <p color='red'> {{ __('messages.norecords') }}</p>
-        @else
-        <table style="border: 1px solid black">
-            <tr>
-                <!--<td> ID </td> -->
-                <td> {{ __('ID') }}</td>
-                <td> {{ __('messages.Name') }}</td>
-                <td> </td>
-            </tr>
-            @foreach ($tags as $tag)
-            <tr>
-                <td> {{ $tag->id }} </td>
-                <td> {{ $tag->tagname }} </td>
-                @auth
-                @can('is-admin')
-                <td><input type="button" value="{{ __('messages.Delete') }}" onclick="deleteTag({{ $tag->id }})"></td>@endcan @endauth
-                @endforeach
-        </table>
-        @endif
-        @auth<p> <input type="button" value="{{ __('messages.New Tag') }}" onclick="addTag({})"> </p>@endauth
-<!--        <p> <input type="button" value="Search books" onclick="filterBooks({})"> </p>-->
-        <script> ///sample code for later
-            function addTag() {
+        <main>
+            @if (count($tags) == 0)
+            <p color='red'> {{ __('messages.norecords') }}</p>
+            @else
+            <table style="border: 1px solid black">
+                <tr>
+                    <!--<td> ID </td> -->
+                    <td> {{ __('ID') }}</td>
+                    <td> {{ __('messages.Name') }}</td>
+                    <td> </td>
+                </tr>
+                @foreach ($tags as $tag)
+                <tr>
+                    <td> {{ $tag->id }} </td>
+                    <td> {{ $tag->tagname }} </td>
+                    @auth
+                    @can('is-admin')
+                    <td><input type="button" value="{{ __('messages.Delete') }}" onclick="deleteTag({{ $tag->id }})"></td>@endcan @endauth
+                    @endforeach
+            </table>
+            @endif
+            @auth<p> <input type="button" value="{{ __('messages.New Tag') }}" onclick="addTag({})"> </p>@endauth
+    <!--        <p> <input type="button" value="Search books" onclick="filterBooks({})"> </p>-->
+            <script> ///sample code for later
+                function addTag() {
                 window.location.href = "/add_tag";
-            }
-            function editBook(id) {
+                }
+                function editBook(id) {
                 window.location.href = "/edit_book/" + id;
-            }
-            function filterBooks() {
+                }
+                function filterBooks() {
                 window.location.href = "filter";
-            }
-            function deleteTag(id) {
-            window.location.href = "/admin/tags/" + id;
-            }
-        </script>
+                }
+                function deleteTag(id) {
+                window.location.href = "/admin/tags/" + id;
+                }
+            </script>
+        </main>
     </body>
 </html>

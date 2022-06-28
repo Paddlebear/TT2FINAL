@@ -31,46 +31,48 @@
         </div>
         @endif
         @include('layouts.navigation')
-        @if (count($lists) == 0)
-        <p color='red'> {{ __('messages.norecords') }}</p>
-        @else
-        <table style="border: 1px solid black">
-            <tr>
-                <!--<td> ID </td> -->
-                <td> {{ __('messages.Name') }}</td>
-                <td> {{ __('messages.By') }}:</td>
-                <td> {{ __('messages.Description') }}</td>
-                <td> </td>
-            </tr>
-            @foreach ($lists as $list)
-            <tr>
-                <td> {{ $list->listname }} </td>
-                <td> {{ $list->name }} </td>
-                <td> {{ $list->description }} </td>
-                <td><input type="button" value="{{ __('messages.See list contents') }}" onclick="seeList('{{$list->listname}}')"></td>
-                @auth
-                @can('is-admin')<td><input type="button" value="{{ __('messages.Delete list') }}" onclick="deleteList({{ $list->id }})"></td>@endcan @endauth
-                @endforeach
-        </table>
-        @endif
-<!--        <p> <input type="button" value="Search books" onclick="filterBooks({})"> </p>-->
-        <script> ///sample code for later
-            function addBook() {
-            window.location.href = "/add_book";
-            }
-            function editBook(id) {
-            window.location.href = "/edit_book/" + id;
-            }
-            function filterBooks() {
-            window.location.href = "filter";
-            }
-            function seeList(listname) {
-            //var name = str_replace(' ', '_', $listname);
-            window.location.href = "/reading_lists/" + listname;
-            }
-            function deleteList(listID) {
-            window.location.href = "/delete_reading_list/" + listID;
-            }
-        </script>
+        <main>
+            @if (count($lists) == 0)
+            <p color='red'> {{ __('messages.norecords') }}</p>
+            @else
+            <table style="border: 1px solid black">
+                <tr>
+                    <!--<td> ID </td> -->
+                    <td> {{ __('messages.Name') }}</td>
+                    <td> {{ __('messages.By') }}:</td>
+                    <td> {{ __('messages.Description') }}</td>
+                    <td> </td>
+                </tr>
+                @foreach ($lists as $list)
+                <tr>
+                    <td> {{ $list->listname }} </td>
+                    <td> <a href="{{ route('userlist', $list->name ) }}">{{ $list->name }}</a></td>
+                    <td> {{ $list->description }} </td>
+                    <td><input type="button" value="{{ __('messages.See list contents') }}" onclick="seeList('{{$list->listname}}')"></td>
+                    @auth
+                    @can('is-admin')<td><input type="button" value="{{ __('messages.Delete list') }}" onclick="deleteList({{ $list->id }})"></td>@endcan @endauth
+                    @endforeach
+            </table>
+            @endif
+    <!--        <p> <input type="button" value="Search books" onclick="filterBooks({})"> </p>-->
+            <script> ///sample code for later
+                function addBook() {
+                window.location.href = "/add_book";
+                }
+                function editBook(id) {
+                window.location.href = "/edit_book/" + id;
+                }
+                function filterBooks() {
+                window.location.href = "filter";
+                }
+                function seeList(listname) {
+                //var name = str_replace(' ', '_', $listname);
+                window.location.href = "/reading_lists/" + listname;
+                }
+                function deleteList(listID) {
+                window.location.href = "/delete_reading_list/" + listID;
+                }
+            </script>
+        </main>
     </body>
 </html>

@@ -40,31 +40,33 @@
         </div>
         @endif
         @include('layouts.navigation')
-        @if (count($users) == 0)
-        <p color='red'>{{ __('messages.norecords') }}</p>
-        @else
-        <table style="border: 1px solid black">
-            <tr>
-                <td> ID </td>
-                <td>{{ __('messages.Username') }}</td>
-                <td>{{ __('messages.E-mail') }}</td>
-                <td> </td>
-            </tr>
-            @foreach ($users as $user)
-            <tr>
-                <td> {{ $user->id }} </td>
-                <td> {{ $user->name }} </td>
-                <td> {{ $user->email }} </td>
-                <td><input type="button" value="{{ __('messages.Delete user') }}" onclick="deleteUser('{{$user->id}}')"></td>
-                @endforeach
-        </table>
-        @endif
+        <main>
+            @if (count($users) == 0)
+            <p color='red'>{{ __('messages.norecords') }}</p>
+            @else
+            <table style="border: 1px solid black">
+                <tr>
+                    <td> ID </td>
+                    <td>{{ __('messages.Username') }}</td>
+                    <td>{{ __('messages.E-mail') }}</td>
+                    <td> </td>
+                </tr>
+                @foreach ($users as $user)
+                <tr>
+                    <td> {{ $user->id }} </td>
+                    <td> {{ $user->name }} </td>
+                    <td> {{ $user->email }} </td>
+                    <td><input type="button" value="{{ __('messages.Delete user') }}" onclick="deleteUser('{{$user->id}}')"></td>
+                    @endforeach
+            </table>
+            @endif
+        </main>
 <!--        <p> <input type="button" value="New Book" onclick="addCountry({})"> </p>
         <p> <input type="button" value="Search books" onclick="filterBooks({})"> </p>-->
         <script> ///sample code for later
             function deleteUser(id)
             {
-                window.location.href = "/admin/users/" + id;
+            window.location.href = "/admin/users/" + id;
             }
         </script>
     </body>

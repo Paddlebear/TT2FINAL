@@ -40,29 +40,31 @@
         </div>
         @endif
         @include('layouts.navigation')
-        {{ __('messages.We will add a new list to the system.') }}
-        <form method="POST"
-              action="{{action([App\Http\Controllers\ReadingListController::class, 'store']) }}">
-            @csrf
-            <input type="hidden" name="user_id" value="{{$user->id}}">
-            <input type="radio" id="yes" name="visible" value=1>
-            <label for="html">Visible</label><br>
-            <input type="radio" id="no" name="visible" value=0>
-            <label for="css">Hidden</label><br>
-            <label for="listname">{{ __('messages.Name') }}: </label>
-            <input type="text" name="listname" id="listname">
-            <label for="description">{{ __('messages.Description') }}: </label>
-            <input type="text" name="description" id="description">
-            <input type="submit" value="{{ __('messages.Create') }}">
-            @if (count($errors) > 0)
-            <div>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-        </form>
+        <main>
+            {{ __('messages.We will add a new list to the system.') }}
+            <form method="POST"
+                  action="{{action([App\Http\Controllers\ReadingListController::class, 'store']) }}">
+                @csrf
+                <input type="hidden" name="user_id" value="{{$user->id}}">
+                <input type="radio" id="yes" name="visible" value=1>
+                <label for="html">Visible</label><br>
+                <input type="radio" id="no" name="visible" value=0>
+                <label for="css">Hidden</label><br>
+                <label for="listname">{{ __('messages.Name') }}: </label>
+                <input type="text" name="listname" id="listname">
+                <label for="description">{{ __('messages.Description') }}: </label>
+                <input type="text" name="description" id="description">
+                <input type="submit" value="{{ __('messages.Create') }}">
+                @if (count($errors) > 0)
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+            </form>
+        </main>
     </body>
 </html>

@@ -40,13 +40,15 @@
         </div>
         @endif
         @include('layouts.navigation')
-        {{ __('messages.deletelist', ['name' => $list->listname]) }}
-        <td>
-                    <form method="POST"
+        <main>
+            {{ __('messages.deletelist', ['name' => $list->listname]) }}
+            <td>
+                <form method="POST"
 
-                          action="{{action([App\Http\Controllers\ReadingListController::class, 'destroy'], $list->id) }}">
-                        @csrf @method('DELETE')<input type="submit"
-                                                      value="delete"></form> </td>
-                </td>
-    </body>
+                      action="{{action([App\Http\Controllers\ReadingListController::class, 'destroy'], $list->id) }}">
+                    @csrf @method('DELETE')<input type="submit"
+                                                  value="delete"></form> </td>
+        </td>
+    </main>
+</body>
 </html>
