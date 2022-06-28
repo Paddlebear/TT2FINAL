@@ -45,7 +45,10 @@
               action="{{action([App\Http\Controllers\ReadingListController::class, 'store']) }}">
             @csrf
             <input type="hidden" name="user_id" value="{{$user->id}}">
-            <input type="hidden" name="visible" value=1>
+            <input type="radio" id="yes" name="visible" value=1>
+            <label for="html">Visible</label><br>
+            <input type="radio" id="no" name="visible" value=0>
+            <label for="css">Hidden</label><br>
             <label for="listname">{{ __('messages.Name') }}: </label>
             <input type="text" name="listname" id="listname">
             <label for="description">{{ __('messages.Description') }}: </label>

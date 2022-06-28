@@ -39,11 +39,12 @@ class ReadingListController extends Controller
 //    }
     public function userlist($name)
     {
-        $user = DB::table('users')->select('users.*')->where('name', '=', $name)->get();
-        $id = $user[0]->id;
+        $users = DB::table('users')->select('users.*')->where('name', '=', $name)->get();
+        $user = $users[0];
+        //$id = $user[0]->id;
         $lists = DB::table('reading_lists')->join('users', 'reading_lists.user_id', '=', 'users.id')
                 ->select('reading_lists.*','users.name')->where('users.name', '=', $name)->get();
-        return view ('user_lists', ['lists' => $lists, 'user' => $name]);
+        return view ('user_lists', ['lists' => $lists, 'user' => $user]);
         //return view('user_lists', ['user' => $name]);
     }
     /**
@@ -68,7 +69,8 @@ class ReadingListController extends Controller
         $rules = array(
             'listname' => 'required|min:2|max:200',
             'description' => 'min:0|max:2000',
-            'user_id' => 'required|exists:users,id'
+            'user_id' => 'required|exists:users,id',
+            'visible' => 'required'
         );
         $this->validate($request, $rules);
         $list = new ReadingList();
@@ -126,12 +128,13 @@ class ReadingListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $rules = array(
             'listname' => 'required|min:2|max:200',
             'description' => 'min:0|max:2000',
-            'user_id' => 'required|exists:users,id'
+            'user_id' => 'required|exists:users,id',
+            'visible' => 'required'
         );
         $this->validate($request, $rules);
         $list = ReadingList::find($request->id);

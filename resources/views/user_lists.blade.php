@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{{Auth::user()->name}}'s profile - Reading Recs</title>
+        <title>{{$user->name}}'s profile - Reading Recs</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -60,6 +60,7 @@
                     <td><input type="button" value="{{ __('messages.See list contents') }}" onclick="seeList('{{$list->listname}}')"></td>
                     @auth
                     @if (Auth::id() == $list -> user_id)
+                    <td><input type="button" value="{{ __('messages.Update') }}" onclick="editList({{ $list->id }})"></td>
                     <td><input type="button" value="{{ __('messages.Delete list') }}" onclick="deleteList({{ $list->id }})"></td>
                     @endif
                     @endauth
@@ -67,7 +68,7 @@
             </table>
             @endif
             @auth
-            @if (Auth::id() == $lists[0] -> user_id)
+            @if (Auth::id() == $user->id)
             <p> <input type="button" value="{{ __('messages.New list') }}" onclick="addList({{Auth::id()}})"> </p>
             @endif
             @endauth
@@ -89,6 +90,9 @@
             function seeList(listname) {
             //var name = str_replace(' ', '_', $listname);
             window.location.href = "/reading_lists/" + listname;
+            }
+            function editList(id) {
+                window.location.href = "/edit_list/" + id;
             }
 //            function filterBooks() {
 //                window.location.href = "filter";

@@ -41,7 +41,9 @@ Route::get('add_reading_list/{id}', [ReadingListController::class, 'create'])->m
 Route::get('delete_reading_list/{id}', [ReadingListController::class, 'showdelete'])->middleware('auth')->name('deletelist');
 Route::get('reading_lists/{listname}', [ReadingListController::class, 'showlist'])->name('list');
 Route::get('edit_book/{id}', [BookController::class, 'show'])->middleware('auth.admin')->name('bookupdate');
+Route::get('edit_list/{id}', [ReadingListController::class, 'show'])->middleware('auth')->name('listupdate');
 Route::post('book/update', [BookController::class, 'update'])->middleware('auth.admin'); //???
+Route::post('list/update', [ReadingListController::class, 'update'])->middleware('auth'); //???
 //Route::get('reading_lists/{name}', [ReadingListController::class, 'userlist'])->middleware('auth')->name('userlist');
 Route::get('profile/{name}', [ReadingListController::class, 'userlist'])->middleware('auth')->name('userlist');
 Route::get('add_to_list/{bookid}/{userid}', [ReadingListController::class, 'edit'])->middleware('auth')->name('addtolist');
