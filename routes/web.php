@@ -49,7 +49,7 @@ Route::get('edit_list/{id}', [ReadingListController::class, 'show'])->middleware
 Route::post('book/update', [BookController::class, 'update'])->middleware('auth.admin','log'); //???
 Route::post('list/update', [ReadingListController::class, 'update'])->middleware('auth','log'); //???
 //Route::get('reading_lists/{name}', [ReadingListController::class, 'userlist'])->middleware('auth')->name('userlist');
-Route::get('profile/{name}', [ReadingListController::class, 'userlist'])->middleware('auth','log')->name('userlist');
+Route::get('profile/{name}', [ReadingListController::class, 'userlist'])->middleware('log')->name('userlist');
 Route::get('add_to_list/{bookid}/{userid}', [ReadingListController::class, 'edit'])->middleware('auth','log')->name('addtolist');
 Route::post('add_to_list', [ReadingListController::class, 'addlist'])->middleware('auth','log')->name('addtolistupdate');
 Route::get('add_tags_to_list/{listid}', [ReadingListController::class, 'edittags'])->middleware('auth','log')->name('addtagtolist');

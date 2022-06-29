@@ -205,14 +205,14 @@ class ReadingListController extends Controller {
                 //select('reading_lists.*', 'users.name')->get();
         $query = User::join('reading_lists', 'users.id', '=', 'reading_lists.user_id');
         $query = $query->join('reading_list_tag', 'reading_lists.id', '=', 'reading_list_tag.reading_list_id');
-        if ($tagid != null && $tagid > 1) {
-            $query = $query->where('reading_list_tag.tag_id','=',$tagid);
-        }
         if ($request->listname != null) {
             $query = $query->where('reading_lists.listname', 'LIKE', '%' . $request->listname . '%');
         }
         if ($request->name != null) {
             $query = $query->where('users.name', 'LIKE', '%' . $request->name . '%');
+        }
+        if ($tagid != null && $tagid > 1) {
+            $query = $query->where('reading_list_tag.tag_id','=',$tagid);
         }
         $query = $query->select('reading_lists.*', 'users.name')->where('reading_lists.visible','=', 1);
         //echo $request->year_from;

@@ -50,10 +50,14 @@
                     <th> {{ __('messages.Name') }}</th>
                     <th> {{ __('messages.By') }}: </th>
                     <th> {{ __('messages.Description') }}</th>
+                    @auth
+                    @if (Auth::id() == $user->id)
                     <th> </th>
                     <th> </th>
                     <th> </th>
                     <th> </th>
+                    @endif
+                    @endauth
                 </tr>
                 @foreach ($lists as $list)
                 <tr>
