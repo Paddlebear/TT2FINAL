@@ -41,7 +41,7 @@
         @endif
         @include('layouts.navigation')
         <main>
-
+        <p style="font-weight:bold; font-size:24px;">{{ __('messages.profile', ['name'=>$user->name]) }}</p>
             @if (count($lists) == 0)
             <p color='red'>{{ __('messages.norecords') }}</p>
             @else
