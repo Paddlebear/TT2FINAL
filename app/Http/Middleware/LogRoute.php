@@ -22,7 +22,6 @@ class LogRoute
             $log = [
                 'URI' => $request->getUri(),
                 'METHOD' => $request->getMethod(),
-                'REQUEST_BODY' => $request->all(),
                 'IP' => $request->ip()
             ];
 
