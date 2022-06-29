@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>All books - Reading Recs</title>
+        <title>{{ __('messages.Search results') }} - Reading Recs</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -35,15 +35,15 @@
             @if (count($books) == 0)
             <p color='red'> {{ __('messages.norecords') }}</p>
             @else
-            <table style="border: 1px solid black">
+            <table>
                 <tr>
                     <!--<td> ID </td> -->
-                    <td> {{ __('messages.Book Title') }}</td>
-                    <td> {{ __('messages.Author') }}</td>
-                    <td> {{ __('messages.Publication Year') }}</td>
-                    <td> {{ __('messages.Genre') }}</td>
-                    <td> </td>
-                </tr>
+                    <th> {{ __('messages.Book Title') }}</th>
+                    <th> {{ __('messages.Author') }}</th>
+                    <th> {{ __('messages.Publication Year') }}</th>
+                    <th> {{ __('messages.Genre') }}</th>
+                    <th> </th>
+            </tr>
                 @foreach ($books as $book)
                 <tr>
                     <td> {{ $book->booktitle }} </td>

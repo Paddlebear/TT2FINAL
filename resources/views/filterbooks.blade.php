@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{{ __('messages.Add book to list') }} - Reading Recs</title>
+        <title>{{ __('messages.Search Books') }} - Reading Recs</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -41,7 +41,7 @@
         @endif
         @include('layouts.navigation')
         <main>
-            <p>Filter books...</p>
+            <p>{{ __('messages.Filter books') }}...</p>
             <form method="POST" action="{{ action([App\Http\Controllers\BookController::class, 'filter']) }}">
                 @csrf
                 <p><label for="booktitle">{{ __('messages.Title or portion of it') }}: </label>

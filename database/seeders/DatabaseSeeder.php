@@ -354,13 +354,19 @@ class DatabaseSeeder extends Seeder
             'tagname' => 'Any'
         ]);
         $tag = Tag::create([
-            'tagname' => 'tag1'
+            'tagname' => 'Fanfiction'
         ]);
         $tag = Tag::create([
-            'tagname' => 'tag2'
+            'tagname' => 'Angst'
         ]);
         $tag = Tag::create([
-            'tagname' => 'tag3'
+            'tagname' => 'Funny'
+        ]);
+        $tag = Tag::create([
+            'tagname' => 'Classics'
+        ]);
+        $tag = Tag::create([
+            'tagname' => 'Favorites'
         ]);
         $readinglist = ReadingList::create([
             'listname' => 'Test list',

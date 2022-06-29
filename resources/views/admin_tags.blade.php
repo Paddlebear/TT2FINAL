@@ -35,14 +35,15 @@
             @if (count($tags) == 0)
             <p color='red'> {{ __('messages.norecords') }}</p>
             @else
-            <table style="border: 1px solid black">
+            <table>
                 <tr>
                     <!--<td> ID </td> -->
-                    <td> {{ __('ID') }}</td>
-                    <td> {{ __('messages.Name') }}</td>
-                    <td> </td>
+                    <th> {{ __('ID') }}</th>
+                    <th> {{ __('messages.Name') }}</th>
+                    <th> </th>
                 </tr>
                 @foreach ($tags as $tag)
+                @if ($loop->first) @continue @endif
                 <tr>
                     <td> {{ $tag->id }} </td>
                     <td> {{ $tag->tagname }} </td>

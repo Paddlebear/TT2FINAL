@@ -1,11 +1,11 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
+            <div class="flex items-center">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a style="padding:10px;" href="{{ route('home') }}">
+                <div class="shrink-0 flex items-center" id="homelinks">
+                    <a style="padding:10px;" class="title" href="{{ route('home') }}">
                         Reading Recs
                     </a>
                     <a style="padding:10px;" href="{{ route('locale.setting', 'en') }}">
@@ -37,7 +37,8 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                        <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+                                style="background-color: transparent; border:none;">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">

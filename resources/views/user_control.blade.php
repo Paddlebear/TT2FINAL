@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>User list - Reading Recs</title>
+        <title>{{ __('messages.All Users') }} - Reading Recs</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -44,17 +44,17 @@
             @if (count($users) == 0)
             <p color='red'>{{ __('messages.norecords') }}</p>
             @else
-            <table style="border: 1px solid black">
+            <table>
                 <tr>
-                    <td> ID </td>
-                    <td>{{ __('messages.Username') }}</td>
-                    <td>{{ __('messages.E-mail') }}</td>
-                    <td> </td>
+                    <th> ID </th>
+                    <th>{{ __('messages.Username') }}</th>
+                    <th>{{ __('messages.E-mail') }}</th>
+                    <th> </th>
                 </tr>
                 @foreach ($users as $user)
                 <tr>
                     <td> {{ $user->id }} </td>
-                    <td> {{ $user->name }} </td>
+                    <td><a href="{{ route('userlist', $user->name ) }}">{{ $user->name }}</a></td>
                     <td> {{ $user->email }} </td>
                     <td><input type="button" value="{{ __('messages.Delete user') }}" onclick="deleteUser('{{$user->id}}')"></td>
                     @endforeach

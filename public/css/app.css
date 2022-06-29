@@ -9,16 +9,18 @@
 ::before,
 ::after {
 /*  box-sizing: border-box;  1 */
-  border-width: 0;  2 
+  border-width: 0; 
 /*  border-style: solid;  2 
   border-color: #e5e7eb;  2 */
 }
 
-/*::before,
+::before,
 ::after {
   --tw-content: '';
-}*/
-
+}
+nav {
+    background-color: #F3E2FF;
+}
 /*
 1. Use a consistent sensible line-height in all browsers.
 2. Prevent adjustments of font size after orientation changes in iOS.
@@ -40,20 +42,51 @@ html {
 2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
 */
 main {
-    padding-left:100px;
-    padding-right:100px;
+    padding-left: 150px;
+    padding-right: 150px;
+    padding-top: 40px;
 }
 body {
-  margin: 0; /* 1 */
-  line-height: inherit; /* 2 */
+  margin: 1; /* 1 */
+  line-height: 2; /* 2 */
+  background-color: #F9F1FF;
 }
 
+.title{
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+#homelinks a
+{
+    margin: 10px;
+}
+main a{
+    text-decoration: underline;
+}
 /*
 1. Add the correct height in Firefox.
 2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
 3. Ensure horizontal rules are visible by default.
 */
-
+table
+{
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid;
+}
+th {
+    font-weight: bold;
+    border: 1px solid;
+}
+td {
+    padding: 10px;
+    border: 1px solid;
+}
+p {
+    padding:20px;
+    font-size:18px;
+}
 hr {
   height: 0; /* 1 */
   color: inherit; /* 2 */
@@ -170,7 +203,8 @@ textarea {
   line-height: inherit; /* 1 */
   color: inherit; /* 1 */
   margin: 0; /* 2 */
-  padding: 0; /* 3 */
+  padding: 5px; /* 3 */
+  border-radius: 10px;
 }
 
 /*
@@ -192,8 +226,9 @@ button,
 [type='reset'],
 [type='submit'] {
   -webkit-appearance: button; /* 1 */
-  background-color: transparent; /* 2 */
+  background-color: #E8C9FF; /* 2 */
   background-image: none; /* 2 */
+  border: 1px solid;
 }
 
 /*
@@ -390,7 +425,7 @@ video {
 [type='text']:focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
+/*  --tw-ring-inset: var(--tw-empty,! !);*/
   --tw-ring-offset-width: 0px;
   --tw-ring-offset-color: #fff;
   --tw-ring-color: #2563eb;
@@ -477,7 +512,7 @@ select {
 [type='checkbox']:focus,[type='radio']:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
+/*  --tw-ring-inset: var(--tw-empty,! !);*/
   --tw-ring-offset-width: 2px;
   --tw-ring-offset-color: #fff;
   --tw-ring-color: #2563eb;
@@ -580,9 +615,9 @@ select {
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
-}*/
+}
 
-/*::-webkit-backdrop {
+::-webkit-backdrop {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;

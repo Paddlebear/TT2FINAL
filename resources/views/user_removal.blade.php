@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Delete a user - Reading Recs</title>
+        <title>{{ __('messages.Delete user') }} - Reading Recs</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -44,7 +44,7 @@
         {{ __('messages.deleteuser', ['name' => $user->name]) }}
         <form method="POST"
         action="{{action([App\Http\Controllers\AdminController::class, 'destroy'], $user->id) }}">
-            @csrf @method('DELETE')<input type="submit" value="delete"></form>
+            @csrf @method('DELETE')<input type="submit" value="{{ __('messages.Delete') }}"></form>
         </main>
 </body>
 </html>

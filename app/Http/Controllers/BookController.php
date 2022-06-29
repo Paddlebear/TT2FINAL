@@ -163,8 +163,8 @@ class BookController extends Controller
         if ($genreid != null && $genreid > 1) {
             $query = $query->where('books.genre_id','=',$genreid);
         }
-        if ($request->title != null) {
-            $query = $query->where('books.booktitle', 'LIKE', '%' . $request->title . '%');
+        if ($request->booktitle != null) {
+            $query = $query->where('books.booktitle', 'LIKE', '%' . $request->booktitle . '%');
         }
         if ($request->author != null) {
             $query = $query->where('books.author', 'LIKE', '%' . $request->author . '%');

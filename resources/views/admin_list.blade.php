@@ -35,13 +35,13 @@
             @if (count($lists) == 0)
             <p color='red'> {{ __('messages.norecords') }}</p>
             @else
-            <table style="border: 1px solid black">
+            <table>
                 <tr>
                     <!--<td> ID </td> -->
-                    <td> {{ __('messages.Name') }}</td>
-                    <td> {{ __('messages.By') }}:</td>
-                    <td> {{ __('messages.Description') }}</td>
-                    <td> </td>
+                    <th> {{ __('messages.Name') }}</th>
+                    <th> {{ __('messages.By') }}:</th>
+                    <th> {{ __('messages.Description') }}</th>
+                    <th> </th>
                 </tr>
                 @foreach ($lists as $list)
                 <tr>

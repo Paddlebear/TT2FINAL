@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Delete a reading list - Reading Recs</title>
+        <title>{{ __('messages.Delete list') }} - Reading Recs</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -47,7 +47,7 @@
 
                       action="{{action([App\Http\Controllers\ReadingListController::class, 'destroy'], $list->id) }}">
                     @csrf @method('DELETE')<input type="submit"
-                                                  value="delete"></form> </td>
+                                                  value="{{ __('messages.Delete') }}"></form> </td>
         </td>
     </main>
 </body>

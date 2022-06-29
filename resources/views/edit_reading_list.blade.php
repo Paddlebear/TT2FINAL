@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Update reading list</title>
+        <title>{{ __('messages.Update reading list') }}</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -47,12 +47,12 @@
                 <input type="hidden" name="id" value="{{ $list->id }}">
                 <input type="hidden" name="user_id" value="{{ $list->user_id }}">
                 <input type="radio" id="yes" name="visible" value=1>
-                <label for="yes">Visible</label><br>
+                <label for="yes">{{ __('messages.Visible') }}</label><br>
                 <input type="radio" id="no" name="visible" value=0>
-                <label for="no">Hidden</label><br>
-                <label for="listname">Name: </label>
+                <label for="no">{{ __('messages.Hidden') }}</label><br>
+                <label for="listname">{{ __('messages.Name') }}: </label>
                 <input type="text" name="listname" id="listname" value="{{ $list->listname }}">
-                <label for="description">Description: </label>
+                <label for="description">{{ __('messages.Description') }}: </label>
                 <input type="text" name="description" id="description" value="{{ $list->description }}">
                 <input type="submit" value="{{ __('messages.Update') }}">
                 @if (count($errors) > 0)

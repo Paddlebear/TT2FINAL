@@ -56,7 +56,7 @@
                             <input type="number" name="publicationyear" id="publicationyear" value="{{ $book->publicationyear }}">-->
                 <label for="list_select">{{ __('messages.Reading Lists') }}: </label>
                 <select id="list_select" name="reading_list_id"></select>
-                <input type="submit" value="update">
+                <input type="submit" value="{{ __('messages.Update') }}">
                 @if (count($errors) > 0)
                 <div>
                     <ul>

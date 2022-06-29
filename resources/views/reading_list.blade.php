@@ -41,31 +41,39 @@
         @endif
         @include('layouts.navigation')
         <main>
-        {{$list[0]->listname}} - {{$list[0]->name}}:
-        @if (count($books) == 0)
-        <p color='red'>{{ __('messages.emptylist') }}</p>
-        @else
-        <table style="border: 1px solid black">
-            @foreach ($books as $book)
-            <tr>
-                <td> {{ $book->booktitle }} </td>
-                <td> {{ $book->author }} </td>
-                <td> {{ $book->publicationyear }} </td>
-                <td> {{ $book->genrename }} </td>
-                @endforeach
-                @endif        
-        </table>
-        <p></p>
-        @if (count($tags) == 0)
-        <p color='red'>{{ __('messages.emptytags') }}</p>
-        @else
-        <table style="border: 1px solid black">
-            @foreach ($tags as $tag)
-            <tr>
-                <td> {{ $tag->tagname }} </td>
-                @endforeach
-                @endif
-        </table>
+            <p style="font-weight:bold; font-size:24px;">{{$list[0]->listname}} - {{$list[0]->name}}:</p>
+            @if (count($books) == 0)
+            <p color='red'>{{ __('messages.emptylist') }}</p>
+            @else
+            <table>
+                <tr>
+                    <!--<td> ID </td> -->
+                    <th> {{ __('messages.Book Title') }}</th>
+                    <th> {{ __('messages.Author') }}</th>
+                    <th> {{ __('messages.Publication Year') }}</th>
+                    <th> {{ __('messages.Genre') }}</th>
+            </tr>
+                @foreach ($books as $book)
+                <tr>
+                    <td> {{ $book->booktitle }} </td>
+                    <td> {{ $book->author }} </td>
+                    <td> {{ $book->publicationyear }} </td>
+                    <td> {{ $book->genrename }} </td>
+                    @endforeach
+                    @endif        
+            </table>
+            <p></p>
+            @if (count($tags) == 0)
+            <p color='red'>{{ __('messages.emptytags') }}</p>
+            @else
+            <p>{{ __('messages.Tags') }}:</p>
+            <table>
+                @foreach ($tags as $tag)
+                <tr>
+                    <td> {{ $tag->tagname }} </td>
+                    @endforeach
+                    @endif
+            </table>
         </main>
     </body>
 </html>

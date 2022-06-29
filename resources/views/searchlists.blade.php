@@ -2,7 +2,7 @@
 <!-- this is also the homepage. -->
 <html>
     <head>
-        <title>Reading Recs</title>
+        <title>{{ __('messages.Search results') }} - Reading Recs</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -45,12 +45,13 @@
             @if (count($lists) == 0)
             <p color='red'>{{ __('messages.norecords') }}</p>
             @else
-            <table style="border: 1px solid black">
+            <table>
                 <tr>
-                    <td> {{ __('messages.Name') }}</td>
-                    <td> {{ __('messages.By') }}:</td>
-                    <td> {{ __('messages.Description') }}</td>
-                    <td> </td>
+                    <!--<td> ID </td> -->
+                    <th> {{ __('messages.Name') }}</th>
+                    <th> {{ __('messages.By') }}:</th>
+                    <th> {{ __('messages.Description') }}</th>
+                    <th> </th>
                 </tr>
                 @foreach ($lists as $list)
                 <tr>
