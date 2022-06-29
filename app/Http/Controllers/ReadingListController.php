@@ -215,7 +215,6 @@ class ReadingListController extends Controller {
             $query = $query->where('reading_list_tag.tag_id','=',$tagid);
         }
         $query = $query->select('reading_lists.*', 'users.name')->where('reading_lists.visible','=', 1);
-        //echo $request->year_from;
-        return view('searchlists', array('lists' => $query->orderBy('id')->get()));
+        return view('searchlists', array('lists' => $query->get()));
     }
 }
